@@ -1,0 +1,80 @@
+buildscript {
+
+    repositories {
+
+        jcenter()
+
+    }
+
+}
+
+plugins {
+
+    id 'org.springframework.boot' version '2.1.7.RELEASE'
+    id 'java'
+    id 'java-library'
+    id 'maven-publish'
+
+}
+
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.springframework.boot'
+
+group = 'spring.black'
+version = '0.0.1'
+
+configurations {
+
+    compileOnly {
+
+        extendsFrom annotationProcessor
+
+    }
+
+}
+
+repositories {
+
+    mavenCentral()
+    jcenter()
+
+    maven {
+
+        url 'https://repo.spring.io/libs-snapshot'
+
+    }
+
+    maven {
+
+        url 'https://jitpack.io'
+
+        credentials { username authToken }
+
+    }
+
+}
+
+bootJar {
+
+    enabled = false
+
+}
+
+jar {
+
+    enabled = true
+
+}
+
+dependencies {
+
+    runtime('mysql:mysql-connector-java')
+
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest'
+
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+}
